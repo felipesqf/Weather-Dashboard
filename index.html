@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>Weather Dashboard</title>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-md-1"></div>
+    <div class="col-md-2 sidenav">
+        
+        <form class="form-inline">
+          <h1>Search</h1>
+            <div class="form-group mx-md-3 mb-2">
+              <input type="input" class="form-control mb-2" id="city-input" placeholder="City">
+            <button type="submit" class="btn btn-secondary mb-2" id="search">Search</button>
+        </form>
+    </div>
+    <div class="btn-group-vertical" id="cities"></div>
+  </div>
+   
+    <div class="col-md-8">
+      <hr>
+      <h2>Weather Information</h2><br>
+        <section id="general-info"></section>
+    
+    <h2>5-Day Forecast</h2>
+    <hr>
+    <section id="forecast">
+      <div class="row">
+      <div class="col-sm-2" id="day1">
+        <div class="card" style="width: 13rem;">
+          <img src="./images/normal.PNG" class="card-img-top-1" alt="Forecast day 1">
+          <div class="card-body">
+            <h5 class="card-title-1">Card title</h5>
+            <p class="card-text-1"></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2" id="day2">
+        <div class="card" style="width: 13rem;">
+          <img src="./images/snow.PNG" class="card-img-top-2" alt="Forecast day 2">
+          <div class="card-body">
+            <h5 class="card-title-2">Card title</h5>
+            <div class="card-text-2"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2" id="day3">
+        <div class="card" style="width: 13rem;">
+          <img src="./images/sun.PNG" class="card-img-top-3" alt="Forecast day 3">
+          <div class="card-body">
+            <h5 class="card-title-3">Card title</h5>
+            <div class="card-text-3"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2" id="day4">
+        <div class="card" style="width: 13rem;">
+          <img src="./images/sunny.PNG" class="card-img-top-4" alt="Forecast day 4">
+          <div class="card-body">
+            <h5 class="card-title-4">Card title</h5>
+            <div class="card-text-4"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2" id="day5">
+        <div class="card" style="width: 13rem;">
+          <img src="./images/normal.PNG" class="card-img-top-5" alt="Forecast day 5">
+          <div class="card-body">
+            <h5 class="card-title-5">Card title</h5>
+            <div class="card-text-5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+    </section>
+    <hr>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

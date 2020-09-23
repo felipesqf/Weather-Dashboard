@@ -1,0 +1,31 @@
+#general-info,
+#forcast {
+  margin-bottom: 300px;
+}
+#main {
+  margin-top: 30px;
+}
+#city-input,
+#search {
+  float: left;
+  margin-left: 0px;
+}
+.col-sm-4,
+.form-inline {
+  padding-left: 0px;
+}
+.btn-group-vertical button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.form-inline {
+  padding: 0px 0px 0px 0px;
+}
+#day1,
+#day2,
+#day3,
+#day4,
+#day5 {
+  margin: 5px 5px 5px 5px;
+  padding: 15px 15px 15px 15px;
+}
