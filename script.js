@@ -6,8 +6,8 @@ $(".card-title-5").text(moment().add(5, "days").format("DD/MM/YYYY"));
 
 $("#search").on("click", function (event) {
   event.preventDefault();
-  emptyScreen();
   var city = $("#city-input").val();
+  emptyScreen();
   // var queryURLweather =
   //   "https://api.openweathermap.org/data/2.5/weather?q=" +
   //   city +
@@ -42,7 +42,7 @@ function getWeather(response) {
   console.log(forecastDate);
   console.log(todaysDate);
   var newCity =
-    "<button type='button' class='btn btn-secondary btn-lg' id ='" +
+    "<button type='button' class='btn btn-secondary btn-lg btn-block' id ='" +
     response.city.name +
     "'>";
   var divID = "#" + response.city.name;
@@ -95,6 +95,7 @@ function getWeather(response) {
 
 function emptyScreen() {
   $("#general-info").empty();
+  $("#city-input").val("");
   for (var i = 0; i < 6; i++) {
     var classTextIncre = ".card-text-" + i;
     $(classTextIncre).empty();

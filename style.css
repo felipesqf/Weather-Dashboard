@@ -1,4 +1,4 @@
-#general-info,
+/* #general-info,
 #forcast {
   margin-bottom: 300px;
 }
@@ -9,6 +9,7 @@
 #search {
   float: left;
   margin-left: 0px;
+  padding-right: 22px;
 }
 .col-sm-4,
 .form-inline {
@@ -31,4 +32,14 @@
 }
 .form-group mx-md-3 mb-2 {
   margin: 0px 0px 0px 0px;
+} */
+#city-input,
+#search {
+  float: left;
+  margin-left: 0px;
+  padding-right: 22px;
+}
+#general-info,
+#forcast {
+  margin-bottom: 300px;
 }
