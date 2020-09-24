@@ -4,13 +4,12 @@ $(document).ready(function () {
   $(".card-title-3").text(moment().add(3, "days").format("DD/MM/YYYY"));
   $(".card-title-4").text(moment().add(4, "days").format("DD/MM/YYYY"));
   $(".card-title-5").text(moment().add(5, "days").format("DD/MM/YYYY"));
-
+  returnStoredCities(); // get the last city searched
   $("#search").on("click", function (event) {
     event.preventDefault();
     var city = $("#city-input").val();
     emptyScreen(); //empty the screen after clicking in search
     forecastAPI(city); // Calling the api after inserting the city
-    returnStoredCities(); // get the last city searched
   });
 
   function emptyScreen() {
