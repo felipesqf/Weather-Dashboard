@@ -23,6 +23,8 @@ function emptyScreen() {
 
 function forecastAPI(city) {
   //calling the forecastapi and appending information on the screen
+
+  //init forecast api
   var queryURLforecast =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
     city +
@@ -34,6 +36,9 @@ function forecastAPI(city) {
     var todaysDate = moment().format("DD/MM/YYYY");
     console.log(response);
     console.log(todaysDate);
+
+    uviAPI(response.city.coord.lat, response.city.coord.lon);
+    //init of dom manipulation
     var newCity =
       "<button type='button' class='btn btn-secondary btn-lg btn-block' id ='" +
       response.city.name +
@@ -81,13 +86,52 @@ function forecastAPI(city) {
         $(classImgIncre).attr("src", "./images/sunny.PNG");
       }
 
-      $(classTextIncre).append(tempForecast, humidForecast, windForecast);
+      $(classTextIncre).append(tempForecast, humidForecast, windForecast, uvi);
       i2 = i2 + 7;
     }
+  });
+}
+
+//init uvi api
+function uviAPI(lat, lon) {
+  var queryURLUVI =
+    "http://api.openweathermap.org/data/2.5/uvi?lat=" +
+    lat +
+    "&lon=" +
+    lon +
+    "&appid=a2829c56aae5b3f3c839474c7bf9f86a";
+
+  $.ajax({
+    url: queryURLUVI,
+    method: "GET",
+  }).then(function (response) {
+    console.log(response.value);
+    var uvi = $("<div>").text("UVI: " + response.value);
+    if (response.value <= 2) {
+      $(uvi).css({
+        "background-color": "green",
+        width: "65px",
+        color: "white",
+      });
+    } else if (response.value > 3 && response.value < 5) {
+      $(uvi).css({
+        "background-color": "yellow",
+        width: "65px",
+        color: "white",
+      });
+    } else if (response.value > 6 && response.value < 7) {
+      $(uvi).css({
+        "background-color": "orange",
+        width: "65px",
+        color: "white",
+      });
+    } else {
+      response.value > 7;
+    }
+    $("#general-info").append(uvi);
   });
 }
 //$(".btn btn-secondary btn-lg btn-block").on("click", alert("$(this).val()")); //{
 // var existingCity = $(this).val();
 // alert(existingCity);
 // forecastAPI(existingCity);
-// });
