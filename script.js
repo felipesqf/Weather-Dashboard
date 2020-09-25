@@ -1,14 +1,35 @@
 $(document).ready(function () {
-  $(".card-title-1").text(moment().add(1, "days").format("DD/MM/YYYY"));
-  $(".card-title-2").text(moment().add(2, "days").format("DD/MM/YYYY"));
-  $(".card-title-3").text(moment().add(3, "days").format("DD/MM/YYYY"));
-  $(".card-title-4").text(moment().add(4, "days").format("DD/MM/YYYY"));
-  $(".card-title-5").text(moment().add(5, "days").format("DD/MM/YYYY"));
+  for (var i = 1; i < 6; i++) {
+    $(".card-title-" + i).text(moment().add(i, "days").format("DD/MM/YYYY"));
+  }
   returnStoredCities(); // get the last city searched
+
+  var citiesArray = [];
+
+  $("#cities").on("click", ".btn ", function (event) {
+    //display the cities alread seached
+    event.preventDefault();
+    var buttonCity = $(this).attr("id");
+    forecastAPI(buttonCity);
+  });
+
+  function addButtons() {
+    emptyScreen();
+    $("#cities").empty();
+    for (var i = 0; i < citiesArray.length; i++) {
+      var newCity = $('<button type="button"' + ">");
+      newCity.addClass("btn btn-secondary btn-lg btn-block");
+      newCity.attr("id", citiesArray[i]);
+      newCity.text(citiesArray[i]);
+      // var divID = "#" + response.city.name;
+      $("#cities").prepend(newCity);
+    }
+  }
+
+  // $(divID).append(response.city.name);
   $("#search").on("click", function (event) {
     event.preventDefault();
     var city = $("#city-input").val();
-    emptyScreen(); //empty the screen after clicking in search
     forecastAPI(city); // Calling the api after inserting the city
   });
 
@@ -40,22 +61,18 @@ $(document).ready(function () {
       },
     }).then(function (response) {
       var todaysDate = moment().format("DD/MM/YYYY");
-      console.log(response);
-      console.log(todaysDate);
-      localStorage.setItem("city", JSON.stringify(response.city.name));
+      var existCity = citiesArray.includes(response.city.name);
+      if (existCity !== true) {
+        citiesArray.push(response.city.name);
+      }
+      emptyScreen(); //empty the screen after clicking in search
+      for (var i = 0; i < citiesArray.length; i++) {
+        localStorage.setItem("city", JSON.stringify(citiesArray[i]));
+      }
 
-      uviAPI(response.city.coord.lat, response.city.coord.lon);
-      //init of dom manipulation
-      var newCity =
-        "<button type='button' class='btn btn-secondary btn-lg btn-block' data-name='" +
-        response.city.name +
-        "' id='" +
-        response.city.name +
-        "'>";
-      // $(newCity).attr("data-id", response.city.name);
-      var divID = "#" + response.city.name;
-      $("#cities").append(newCity);
-      $(divID).append(response.city.name);
+      addButtons(); // add buttons on the nav
+      uviAPI(response.city.coord.lat, response.city.coord.lon); //get the uvi based on the lat and long
+
       var cityName = $("<h3>").text(
         response.city.name + " - (" + todaysDate + ")"
       );
@@ -86,8 +103,7 @@ $(document).ready(function () {
       );
       $("#general-info").append(cityName, temperature, humidity, windSpeed);
 
-      var i2 = 8;
-
+      var i2 = 8; // to loop into the result array
       for (var i = 1; i < 6; i++) {
         var tempForecast = $("<div>").text(
           "Temperature: " + response.list[i2].main.temp + " C"
@@ -135,8 +151,6 @@ $(document).ready(function () {
       url: queryURLUVI,
       method: "GET",
     }).then(function (response) {
-      console.log(response.value);
-      console.log(response);
       var uvi = $("<div>").text("UVI: " + response.value);
       if (response.value < 2) {
         $(uvi).css({
@@ -167,20 +181,10 @@ $(document).ready(function () {
     });
   }
   function returnStoredCities() {
-    //get the city from the local storage
+    //get the last city from the local storage
     var storedcities = JSON.parse(localStorage.getItem("city"));
     if (storedcities !== null) {
       forecastAPI(storedcities);
     }
   }
-
-  // $(document).on(
-  //   "click",
-  //   ".btn btn-secondary btn-lg btn-block",
-  //   displayMovieInfo
-  // );
-  // $(".btn-block").on("click", function (event) {
-  //   event.preventDefault();
-  //   alert("test");
-  // });
 });
