@@ -36,10 +36,6 @@ $(document).ready(function () {
       statusCode: {
         404: function () {
           $("#general-info").append("City '" + city + "' not found. Try again");
-          $("#general-info").css({
-            "font-size": "60px",
-            color: "Red",
-          });
         },
       },
     }).then(function (response) {
@@ -60,10 +56,28 @@ $(document).ready(function () {
       var divID = "#" + response.city.name;
       $("#cities").append(newCity);
       $(divID).append(response.city.name);
-      var cityName = $("<h3>").text(response.city.name + " - " + todaysDate);
-      var temperature = $("<div>").text(
-        "Temperature: " + response.list[0].main.temp + " C"
+      var cityName = $("<h3>").text(
+        response.city.name + " - (" + todaysDate + ")"
       );
+      var temperature = $("<div>").text(
+        "Temperature: " + response.list[0].main.temp + " C  - "
+      );
+      if (response.list[0].main.temp <= 2)
+        $(temperature).append("<i class='" + "fas fa-snowflake" + "'></i>");
+      else if (
+        response.list[0].main.temp > 2 &&
+        response.list[0].main.temp < 15
+      )
+        $(temperature).append("<i class='" + "fas fa-cloud" + "'></i>");
+      else if (
+        response.list[0].main.temp > 15 &&
+        response.list[0].main.temp < 25
+      )
+        $(temperature).append("<i class='" + "fas fa-cloud-sun" + "'></i>");
+      else {
+        $(temperature).append("<i class='" + "fas fa-sun" + "'></i>");
+      }
+
       var humidity = $("<div>").text(
         "Humidity: " + response.list[0].main.humidity + " %"
       );
@@ -71,6 +85,7 @@ $(document).ready(function () {
         "Wind Speed: " + response.list[0].wind.speed + " MPH"
       );
       $("#general-info").append(cityName, temperature, humidity, windSpeed);
+
       var i2 = 8;
 
       for (var i = 1; i < 6; i++) {
@@ -123,7 +138,7 @@ $(document).ready(function () {
       console.log(response.value);
       console.log(response);
       var uvi = $("<div>").text("UVI: " + response.value);
-      if (response.value <= 2) {
+      if (response.value < 2) {
         $(uvi).css({
           "background-color": "green",
           width: "60px",
@@ -133,7 +148,7 @@ $(document).ready(function () {
         $(uvi).css({
           "background-color": "yellow",
           width: "60px",
-          color: "white",
+          color: "black",
         });
       } else if (response.value > 5 && response.value < 7) {
         $(uvi).css({
@@ -141,8 +156,7 @@ $(document).ready(function () {
           width: "60px",
           color: "white",
         });
-      } else response.value > 7;
-      {
+      } else {
         $(uvi).css({
           "background-color": "red",
           width: "60px",
