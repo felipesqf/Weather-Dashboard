@@ -52,7 +52,7 @@ An API key was used to develop this application.
 
 ### Link to the Website
 
-<a href="https://https://felipesqf.github.io/Weather-Dashboard/">Link to the Weather-Dashboard</a>
+<a href="https://felipesqf.github.io/Weather-Dashboard/">Link to the Weather-Dashboard</a>
 
 ## Authors
 
