@@ -13,7 +13,7 @@ $(document).ready(function () {
   });
 
   function emptyScreen() {
-    //function to clean the content of the screen
+    //function to clean the content of tghe screen
     $("#general-info").empty();
     $("#city-input").val("");
     for (var i = 0; i < 6; i++) {
@@ -110,7 +110,7 @@ $(document).ready(function () {
   //init uvi api
   function uviAPI(lat, lon) {
     var queryURLUVI =
-      "http://api.openweathermap.org/data/2.5/uvi?lat=" +
+      "https://api.openweathermap.org/data/2.5/uvi?lat=" +
       lat +
       "&lon=" +
       lon +
@@ -165,13 +165,8 @@ $(document).ready(function () {
   //   ".btn btn-secondary btn-lg btn-block",
   //   displayMovieInfo
   // );
-  $(document).on("click", ".btn btn-secondary btn-lg btn-block", function (
-    event
-  ) {
-    event.preventDefault();
-    alert("HELLO");
-    var existingCity = $(this).val();
-    alert(existingCity);
-    forecastAPI(existingCity);
-  });
+  // $(".btn-block").on("click", function (event) {
+  //   event.preventDefault();
+  //   alert("test");
+  // });
 });
